@@ -65,10 +65,10 @@ def get_information_from_line(line):
                         uuid = checking_data[1]
                         break;
         version = uuid[0:2]
-        masterIP = uuid[2:4] + " " + uuid[4:6] + " " + uuid[6:8] + " "+ uuid[8:10]
+        mainIP = uuid[2:4] + " " + uuid[4:6] + " " + uuid[6:8] + " "+ uuid[8:10]
         ssid = uuid[10:12] + " " + uuid[12:14]
         channel = uuid[14:16]
-        returnArray = [version, masterIP, ssid, channel]
+        returnArray = [version, mainIP, ssid, channel]
         return returnArray
 
 def searching_beacon():
@@ -89,14 +89,14 @@ def setting_beacon(version, ip, ssid, channel):
         beacon_middle = "02 15 "
 
         mesh_version = version + " "
-        mesh_masterIP = ip  + " "
+        mesh_mainIP = ip  + " "
         mesh_ssid=ssid + " "
         mesh_channel=channel + " "
         mesh_blank="00 00 00 00 00 00 00 00 "
-        beacon_uuid = mesh_version + mesh_masterIP + mesh_ssid + mesh_channel + mesh_blank
+        beacon_uuid = mesh_version + mesh_mainIP + mesh_ssid + mesh_channel + mesh_blank
         beacon_tail = "0F 00 0F 00 C8 00"
         print("version : %s" %mesh_version)
-        print("masterIP : %s" %mesh_masterIP)
+        print("mainIP : %s" %mesh_mainIP)
         print("ssid : %s" %mesh_ssid)
         print("channel : %s" %mesh_channel)
 
@@ -109,11 +109,11 @@ def setting_beacon(version, ip, ssid, channel):
 
 def first_random_setting():
         version = "00"
-        masterIP = get_ip()
+        mainIP = get_ip()
         ssid='{0:0>2}'.format(hex(np.randrange(0,256))[2:]).upper() + " " + '{0:0>2}'.format(hex(np.randrange(0,256))[2:]).upper()
         channel='{0:0>2}'.format(np.randrange(1,12))
 
-        setting_value =[version, masterIP, ssid, channel]
+        setting_value =[version, mainIP, ssid, channel]
         return setting_value
 
 if __name__ == "__main__":
